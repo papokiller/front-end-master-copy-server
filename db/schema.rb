@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217031316) do
+ActiveRecord::Schema.define(version: 20180217032005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,27 @@ ActiveRecord::Schema.define(version: 20180217031316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "episodes", force: :cascade do |t|
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_episodes_on_course_id"
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.bigint "episode_id"
+    t.string "name"
+    t.string "description"
+    t.string "time"
+    t.string "link"
+    t.string "image"
+    t.boolean "download_local"
+    t.string "video_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["episode_id"], name: "index_parts_on_episode_id"
+  end
+
+  add_foreign_key "episodes", "courses"
+  add_foreign_key "parts", "episodes"
 end
