@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217032005) do
+ActiveRecord::Schema.define(version: 20180217041443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,15 @@ ActiveRecord::Schema.define(version: 20180217032005) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
   end
 
   create_table "episodes", force: :cascade do |t|
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "name"
     t.index ["course_id"], name: "index_episodes_on_course_id"
   end
 
@@ -44,6 +47,8 @@ ActiveRecord::Schema.define(version: 20180217032005) do
     t.string "video_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "video_url_local"
     t.index ["episode_id"], name: "index_parts_on_episode_id"
   end
 
