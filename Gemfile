@@ -19,6 +19,12 @@ gem 'dropbox-sdk-v2'
 # pagination
 gem 'kaminari'
 
+# http client
+gem 'rest-client'
+
+# git client
+
+gem 'git'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

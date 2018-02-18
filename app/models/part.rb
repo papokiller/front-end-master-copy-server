@@ -1,9 +1,8 @@
 require 'open-uri'
 class Part < ApplicationRecord
-
+	has_many :uploader_files
   belongs_to :episode
-
-  before_save :download_video
+  before_create :download_video
 
   private
   def download_video

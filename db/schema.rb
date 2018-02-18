@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217041443) do
+ActiveRecord::Schema.define(version: 20180218024018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +49,32 @@ ActiveRecord::Schema.define(version: 20180217041443) do
     t.datetime "updated_at", null: false
     t.string "uid"
     t.string "video_url_local"
+    t.integer "status", default: 0
     t.index ["episode_id"], name: "index_parts_on_episode_id"
+  end
+
+  create_table "uploader_files", force: :cascade do |t|
+    t.bigint "part_id"
+    t.json "data"
+    t.bigint "uploader_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["part_id"], name: "index_uploader_files_on_part_id"
+    t.index ["uploader_id"], name: "index_uploader_files_on_uploader_id"
+  end
+
+  create_table "uploaders", force: :cascade do |t|
+    t.json "data"
+    t.string "service"
+    t.string "username"
+    t.string "password"
+    t.string "access_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "episodes", "courses"
   add_foreign_key "parts", "episodes"
+  add_foreign_key "uploader_files", "parts"
+  add_foreign_key "uploader_files", "uploaders"
 end
